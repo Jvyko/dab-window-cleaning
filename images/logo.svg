@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 62" fill="none">
+  <defs>
+    <clipPath id="drop">
+      <path d="M 28 2 C 8 16 10 30 10 40 A 18 18 0 0 1 46 40 C 46 30 48 16 28 2 Z"/>
+    </clipPath>
+  </defs>
+  <!-- Drop — dark fill, gold outline -->
+  <path d="M 28 2 C 8 16 10 30 10 40 A 18 18 0 0 1 46 40 C 46 30 48 16 28 2 Z"
+        fill="#1c1c1e" stroke="#C9A155" stroke-width="1.5"/>
+  <!-- Squeegee arc inside drop -->
+  <path d="M 14 46 Q 27 28 43 15"
+        stroke="white" stroke-width="2.2" stroke-linecap="round"
+        clip-path="url(#drop)"/>
+  <!-- Water splatter dots -->
+  <circle cx="11" cy="51" r="1.8" fill="white" opacity="0.65"/>
+  <circle cx="8"  cy="47" r="1.2" fill="white" opacity="0.45"/>
+  <circle cx="16" cy="54" r="1.2" fill="white" opacity="0.45"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" fill="none">
+  <defs>
+    <clipPath id="drop-l">
+      <path d="M 100 10 C 62 10 26 64 26 128 A 74 74 0 0 1 174 128 C 174 64 138 10 100 10 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Drop: dark fill -->
+  <path d="M 100 10 C 62 10 26 64 26 128 A 74 74 0 0 1 174 128 C 174 64 138 10 100 10 Z"
+        fill="#1c1c1e"/>
+
+  <!-- Squeegee stroke: gold diagonal line clipped inside drop -->
+  <line x1="46" y1="185" x2="160" y2="52"
+        stroke="#C9A155" stroke-width="11" stroke-linecap="round"
+        clip-path="url(#drop-l)"/>
+</svg>

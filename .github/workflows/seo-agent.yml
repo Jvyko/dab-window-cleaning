@@ -1,0 +1,71 @@
+name: Weekly SEO Agent
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'  # Every Monday at 8am Mountain Time (2pm UTC)
+  workflow_dispatch:        # Also lets you click "Run workflow" anytime from GitHub
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  seo-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: cd seo-agent && npm install
+
+      - name: Run SEO Agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        run: node seo-agent/agent.js
+
+      - name: Get today's date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'seo: automated improvements ${{ steps.date.outputs.date }}'
+          branch: seo/weekly-update-${{ steps.date.outputs.date }}
+          delete-branch: true
+          title: '🔍 Weekly SEO Update — ${{ steps.date.outputs.date }}'
+          body: |
+            ## 🤖 Automated SEO Update
+
+            The SEO agent reviewed all pages and made improvements for better Google rankings.
+
+            **👉 Click the "Files changed" tab to see exactly what was updated.**
+
+            ---
+
+            ### What the agent improved:
+            - Meta titles & descriptions — optimized for click-through rate
+            - Headings — stronger keyword targeting
+            - Image alt text — descriptive and location-aware
+            - Body copy — freshened with current seasonal content
+            - Schema markup — completeness and accuracy
+            - Local SEO signals — city names and service area
+
+            ---
+
+            ### To go live:
+            1. Review the diff in "Files changed"
+            2. Click **Merge pull request**
+            3. Netlify auto-deploys in ~30 seconds ✅
+
+            > This PR was created automatically by the SEO agent. It runs every Monday at 8am MT.
+          labels: 'seo, automated'

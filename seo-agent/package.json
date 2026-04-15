@@ -1,0 +1,12 @@
+{
+  "name": "dab-seo-agent",
+  "version": "1.0.0",
+  "description": "Automated SEO agent for DAB Window Cleaning",
+  "main": "agent.js",
+  "scripts": {
+    "start": "node agent.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.54.0"
+  }
+}
